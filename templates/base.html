@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>Sweet Scent</title>
+    <title>The Scent Queen</title>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
@@ -31,29 +31,14 @@
 	    
         <div class="row align-items-center">
             
-        	<div class="col-lg-2 col-4">
+        	<div class="col-6">
         		<a href="#" class="brand-wrap">
-        			<img class="logo" src="#">
+        			<img class="logo" src="{% static 'img/logoIcon.jpg'  %}">
         		</a>
         	</div>
-        	
-        	<!-- Search bar -->
-        	<div class="col-lg-6 col-sm-12">
-        	    
-        		<form action="#" class="search">
-        			<div class="input-group w-100">
-        			    <input type="text" class="form-control" placeholder="Search">
-        			    <div class="input-group-append">
-        			      <button class="btn btn-primary" type="submit">
-        			        <i class="fa fa-search"></i> Search
-        			      </button>
-        			    </div>
-        		    </div>
-        		</form>
-        	</div>
-        	
+    
         	<!-- Icons for basket and links to sign in/register pages -->
-        	<div class="col-lg-4 col-sm-6 col-12">
+        	<div class="col-6">
         	    
         		<div class="widgets-wrap float-md-right">
         		    
@@ -63,14 +48,24 @@
         			</div>
         			
         			<div class="widget-header icontext">
-        				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+        				
+        				{% if user.is_authenticated %}
+        					<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+        				{% endif %}
+        				
         				<div class="text">
-        					<span class="text-muted">Welcome!</span>
+        					{% if user.is_authenticated %}
+        						<span class="text-muted">Welcome {{ user.username }}!</span>	
+        					{% else %}
+        						<span class="text-muted">Welcome Stranger!</span>
+        						
+        					{% endif %}
         					<div> 
         						<a href="#">Sign in</a> |  
         						<a href="#"> Register</a>
         					</div>
         				</div>
+        				
         			</div>
         
         		</div> 
