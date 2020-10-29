@@ -1,0 +1,34 @@
+{% extends 'base-login.html' %}
+{% load bootstrap_tags %}
+{% block page_title %} Registration Page {% endblock %}
+{% block page_heading %} User Registration {% endblock %}
+{% block content %}
+
+<!--This page is for the user to register an account using a form. Optional button at the bottom of the form to sign in if they already have an account.-->
+
+<div class="container">
+    <div class="register-form">
+        <div class="pb-5">
+            
+            <h2><u>Registration Page!</u></h2>
+            <p class="text-muted">Enter your details in the form below.</p>
+            
+            <br>
+            <form method="POST">
+                
+                {% csrf_token %}
+                {{ registration_form | as_bootstrap }}
+                <button type="submit" class="btn btn-success form-button">Register</button>
+                
+            </form>
+        </div>
+        
+        <div class="pb-2">
+            <p>Or if you've got an account already:</p>
+            <a href="{% url 'login' %}" class="col-xs-12"><button class="btn btn-primary ">Sign in</button></a>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

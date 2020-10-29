@@ -1,6 +1,7 @@
-from django.urls import path
-from home import views
+from django.urls import path, include
+from .views import user_profile
 
+# URLpattern for the profiles app.
 urlpatterns = [
-    # path('', views.home, name='home'),
-    ]
+    path('profile/', user_profile, name="profile"),
+]

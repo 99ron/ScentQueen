@@ -79,6 +79,11 @@ a:link, a:visited {
   background-repeat: no-repeat;
   height: 450px; }
 
+.login-bg {
+  background: url(../img/header1.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  background-size: cover; }
+
 /* -----------------------------------------------------------------------------------------------------------------------------   
                                                                                                                           Body 
 -----------------------------------------------------------------------------------------------------------------------------  */
@@ -95,6 +100,20 @@ a:link, a:visited {
 .text-padding {
   padding-top: 15px;
   padding-bottom: 15px; }
+
+.login-form, .register-form, .reset-form {
+  margin-top: 70px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px; }
+  .login-form a, .register-form a, .reset-form a {
+    color: #000; }
+
+.form-button {
+  width: 60%; }
 
 /* -----------------------------------------------------------------------------------------------------------------------------   
                                                                                                                     Responsive 
