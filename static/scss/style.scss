@@ -4,6 +4,7 @@
 
 $primary-text-colour: #000;
 $header-text-overlay: #ffffff;
+$pink: #d837ed66;
 $secondary-text-colour: #666;
 $white-colour: #fff;
 $link-colour: #000;
@@ -126,7 +127,28 @@ a:link, a:visited {
   height: 450px;
 }
 
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                          Body 
+-----------------------------------------------------------------------------------------------------------------------------  */
 
+.hr-short--pink {
+  background-color: $pink;
+  width: 20%;
+  height: 1px;
+}
+
+
+.hr-long--pink {
+  background-color: $pink;
+  width: 60%;
+  height: 1px;
+}
+
+
+.text-padding {
+  padding-top: 15px;  
+  padding-bottom: 15px;
+}
 
 /* -----------------------------------------------------------------------------------------------------------------------------   
                                                                                                                     Responsive 
