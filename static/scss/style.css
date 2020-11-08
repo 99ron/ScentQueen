@@ -116,16 +116,10 @@ a:link, a:visited {
   padding-top: 15px;
   padding-bottom: 15px; }
 
-.login-form, .reset-form, .register-form {
-  margin-top: 200px;
+.register-form {
+  margin-top: 145px;
   margin-left: 20%;
-  margin-right: 20%;
-  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  padding: 50px;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 10px;
-  position: relative; }
+  margin-right: 20%; }
 
 .form-button {
   width: 60%; }
@@ -213,14 +207,9 @@ a:link, a:visited {
     margin-top: 20px;
     margin-bottom: 20px; }
 
-  .register-form, .login-form, .reset-form {
-    margin: 0px 0px 20px 0px;
-    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    padding: 50px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 10px; }
-    .register-form a, .login-form a, .reset-form a {
-      color: #000; } }
+  .login-form, .reset-form {
+    margin-top: 200px;
+    margin-left: 20%;
+    margin-right: 20%; } }
 
 /*# sourceMappingURL=style.css.map */

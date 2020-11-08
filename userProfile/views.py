@@ -36,24 +36,17 @@ def user_profile(request):
             up = user
             
             try:
-                up.full_name = form.cleaned_data['full_name']
+                up.first_name = form.cleaned_data['first_name']
+                up.last_name = form.cleaned_data['last_name']
                 up.phone_number = form.cleaned_data['phone_number']
                 up.town_city = form.cleaned_data['town_city']
                 up.street_address1 = form.cleaned_data['street_address1']
                 up.street_address2 = form.cleaned_data['street_address2']
                 up.postcode = form.cleaned_data['postcode']
                 up.country = form.cleaned_data['country']
-                image = form.cleaned_data['image']
                 
-                # This checks if any data was collected during validation.
-                if image:
-                    up.image = image
-                else:
-                    # If no data was collected it sets the image to be what it was before the form was submitted.
-                    form.image = user.image
-                    
                 up.save()
-                messages.success(request, "Updated successfully!")
+                messages.success(request, "Your profile was updated successfully!")
                 return render(request, 'home.html')
                 
             except Exception as e:
