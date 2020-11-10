@@ -83,5 +83,4 @@ def makeProfile(request):
     """ This creates an empty profile for the user to fill out """
     upr = UserProfile()
     upr.user = request.user
-    upr.image = "images/no-pic.png"
     upr.save()

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block page_title %} About Us {% endblock %}
+{% block page_heading %} About Us {% endblock %}
+{% block content %}
+{% load static %}
+
+<!--Container which has the main content for the page.-->
+<div class="container">
+        
+    <h1 class="text-center display-3">Who is The Scent Queen?</h1>
+
+    <hr class="hr-short--pink">
+    
+    <div class="text-center">
+        
+        <p class="text-padding lead"> Specialists in Wax Melts and Car Scents, we'll make both your car and home smell amazing!</p>
+        
+        <div class="row">
+            
+            <div class="col-xs-12 col-md-8">
+                
+                <p class="text-padding">Text here  </p>
+                
+            </div>
+            
+            <div class="col-xs-12 col-md-4">
+                
+                <img src="{% static '#' %}" alt="Image Here">
+                
+            </div>
+            
+            
+        </div>
+        
+        
+        <!--Button to link the user over to the contact us page.-->
+        <div class="text-center">
+            <a href="#"><button class="btn btn-lg btn-success">Contact Us</button></a>
+        </div>
+        
+    </div>
+    
+</div>
+
+
+{% endblock %}

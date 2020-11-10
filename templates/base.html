@@ -32,7 +32,7 @@
         <div class="row align-items-center">
             
         	<div class="col-6">
-        		<a href="#" class="brand-wrap">
+        		<a href="{% url 'home' %}" class="brand-wrap">
         			<img class="logo" src="{% static 'img/logoIcon.jpg'  %}">
         		</a>
         	</div>
@@ -93,11 +93,13 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Shop</a>
         </li>
+        {% if user.is_authenticated %}
+	    	<li class="nav-item">
+	          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+	        </li>
+	    {% endif %} 
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="{% url 'about' %}">About Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contact Us</a>
@@ -111,7 +113,7 @@
 <!--If any messages then they're displayed at the top of the page.-->
 {% if messages %}
 <div class="alert alert-success">
-    <div class="messages">
+    <div class="messages text-center">
         {% for message in messages %} 
             {{ message }} 
         {% endfor %}

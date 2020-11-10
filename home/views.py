@@ -16,7 +16,12 @@ from django.utils.encoding import force_bytes
 def home(request):
     return render(request, "home.html")
 
+""" A view to show the about us page """
+def about(request):
+	return render(request, "about-us.html")
+   
 
+# This is the password reset request, I will probably move this later on.
 def password_reset_request(request):
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
