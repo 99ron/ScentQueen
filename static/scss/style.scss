@@ -62,10 +62,6 @@ a:link, a:visited {
 
 // Useful classes to tweak content on the page.
 
-.center-x-flex {
-  justify-content: center;
-}
-
 .shadow-box-outside {
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   
@@ -139,7 +135,7 @@ a:link, a:visited {
 
 // Adds an overlay shadow for the login/registration video.
 .shadow-2 {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2) !important;
@@ -166,7 +162,7 @@ a:link, a:visited {
   padding-bottom: 15px;
 }
 
-.login-form, .reset-form, .register-form {
+.login-form, .reset-form {
   margin-top: 200px;
   margin-left: 20%;
   margin-right: 20%;
@@ -178,12 +174,16 @@ a:link, a:visited {
   position: relative;
 }
 
-// .register-form {
-//         margin-top: 145px;
-//         margin-left: 20%;
-//         margin-right: 20%;
-//         position: relative;
-//     }
+.register-form {
+    margin-left: 10%;
+    margin-right: 10%;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+  }
 
 .form-button {
   width: 60%;

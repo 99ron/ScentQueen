@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.core.mail import BadHeaderError, EmailMessage, send_mail
+from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.conf import settings
 from contactus.forms import contactForm
@@ -26,7 +26,7 @@ def contact(request):
                 message = "Name: {0} \nEmail: {1} \n\nMessage: {2}".format(from_name, from_email, form.cleaned_data['message'])
                 send_mail(subject, message, from_email, [send_to], from_name)
                 
-                messages.success(request, "Your email has been sent, We'll get back to you soon as possible.")
+                messages.success(request, "Your email has been sent, we'll get back to you soon as possible.")
                 return redirect (home)
                 
             except BadHeaderError:
