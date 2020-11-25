@@ -143,6 +143,14 @@ a:link, a:visited {
     left: 0;
 }
 
+// This allows 3 lines of text before truncating the end.
+.text-truncate--3 {
+  display: -webkit-box;   
+  -webkit-line-clamp: 3;   
+  -webkit-box-orient: vertical;     
+  overflow: hidden; 
+}
+
 .hr-short--pink {
   background-color: $pink;
   width: 20%;

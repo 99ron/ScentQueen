@@ -21,6 +21,9 @@ from django.conf.urls.static import static
 from accounts import urls as urls_accounts
 from userProfile import urls as urls_profiles
 from contactus import urls as urls_contactus
+from cart import urls as urls_cart
+from products import urls as urls_products
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +31,9 @@ urlpatterns = [
     path('accounts/', include(urls_accounts)),
     path('user/', include(urls_profiles)),
     path('contact/', include(urls_contactus)),
+    path('cart/', include(urls_cart)),
+    path('products/', include(urls_products)),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='main/registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="main/registration/password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='main/registration/password_reset_complete.html'), name='password_reset_complete'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

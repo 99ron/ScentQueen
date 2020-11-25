@@ -89,6 +89,12 @@ a:link, a:visited {
   top: 0;
   left: 0; }
 
+.text-truncate--3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden; }
+
 .hr-short--pink {
   background-color: #d837ed66;
   width: 20%;
