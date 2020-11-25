@@ -1,6 +1,21 @@
-{% extend 'base.html' %}
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
+<div class="container">
+    <div class="inline-flex">
+        
+        <a href="{% url 'categories' %}">
+            <div class="car-scent-logo col-xs-12 rounded overlay-text mb-3"> Car Scents </div>
+        </a>
+        
+        <a href="{% url 'categories' %}">
+            <div class="wax-melts-logo col-xs-12 rounded overlay-text mb-3"> Wax Melts </div>
+        </a>
+        
+        
+    </div>
+</div>
 
 
 
