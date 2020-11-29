@@ -1,0 +1,394 @@
+/* -----------------------------------------------------------------------------------------------------------------------------  
+                                                                                                                    Variables 
+-----------------------------------------------------------------------------------------------------------------------------*/
+$primary-text-colour: #000;
+$header-text-overlay: #ffffff;
+$overlay-text-colour: #FFF;
+$pink: #d837ed66;
+$secondary-text-colour: #666;
+$white-colour: #fff;
+$link-colour: #000;
+$third-text-colour: #4bb7ff;
+$footer-text-colour: #ffffff;
+$cell-text-colour: #ffffff;
+$a-link-text-colour: #ffffff;
+$background-colour: #54b4eb;
+$hr-colour: #4bb7ff;
+$font-family: "Montserrat";
+$form-colour: #f4f3e9;
+
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                        Body 
+-----------------------------------------------------------------------------------------------------------------------------  */
+
+// Forces content to always be 100% height, also sets default text size.
+html {
+    font-size: 16px;
+    height: 100%;
+}
+
+// This makes sure the footer is always at the bottom of the page regardless of how much content is showing.
+body {
+    font-family: $font-family;
+    font-size: 1.1rem;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+// same as above.
+main {
+    flex: 1 0 auto;
+}
+
+// Colour for visited links.
+a:link, a:visited {
+    color: $primary-text-colour;
+}
+
+// Assigns all buttons to have a transition box shadow around them.
+.btn {
+    transition: box-shadow 0.2s;
+    -webkit-transition: box-shadow 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+// Triggers the box shadow transition when button is hovered.
+.btn:hover,
+.btn:focus {
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+// Useful classes to tweak content on the page.
+
+.shadow-box-outside {
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  
+}
+
+// When the mouse highlights it add's a white text shadow to enhance the font.
+.overlay-text{
+    color: $overlay-text-colour;
+    text-align: center;
+    font-size: 75px;
+    display: grid;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    
+    &:hover {
+        color: $overlay-text-colour;
+        text-align: center;
+        font-size: 75px;
+        display: grid;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        text-shadow: 0px 0px 3px #fff;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                    Site-Header 
+-----------------------------------------------------------------------------------------------------------------------------  */
+
+.site-header {
+    padding: 30px 0px;
+}
+
+.header-text {
+    text-align: end;
+}
+
+.header-logo {
+    margin: 30px auto;
+    text-align: center;
+    
+    a {
+        display: block;
+    }
+    
+    img {
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+ .site-header--text-links {
+    display: inline-block;
+    font-size: 0.85em;
+     margin-bottom: 15px;
+     }
+     
+
+.homepage-header {
+  background-image: url("../img/logo.jpeg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 450px;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                              Background/Logo Images 
+-----------------------------------------------------------------------------------------------------------------------------  */
+
+.about-us-background {
+  background: url("../img/About-us-2.jpg") 
+  center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
+  background-size: cover;
+}
+
+// Categories page this is the car scent logo image.
+.car-scent-logo {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url("../img/shop/car_scents_logo.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  transition: 0.3s;
+  
+  &:hover {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("../img/shop/car_scents_logo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    }
+}
+
+// Categories page this is the wax melts logo image.
+.wax-melts-logo {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url("../img/shop/wax_melts_logo.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  transition: 0.3s;
+  
+  &:hover {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("../img/shop/wax_melts_logo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    }
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                          Body 
+-----------------------------------------------------------------------------------------------------------------------------  */
+
+// Login and registration background video loop.
+#bgVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+// Adds an overlay shadow for the login/registration video.
+.shadow-2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2) !important;
+    top: 0;
+    left: 0;
+}
+
+// This allows 3 lines of text before truncating the end.
+.text-truncate--3 {
+  display: -webkit-box;   
+  -webkit-line-clamp: 3;   
+  -webkit-box-orient: vertical;     
+  overflow: hidden; 
+}
+
+.hr-short--pink {
+  background-color: $pink;
+  width: 20%;
+  height: 1px;
+}
+
+
+.hr-long--pink {
+  background-color: $pink;
+  width: 60%;
+  height: 1px;
+}
+
+
+.text-padding {
+  padding-top: 15px;  
+  padding-bottom: 15px;
+}
+
+.login-form, .reset-form {
+  margin-top: 200px;
+  margin-left: 20%;
+  margin-right: 20%;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+}
+
+.register-form {
+    margin-left: 10%;
+    margin-right: 10%;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+  }
+
+.form-button {
+  width: 60%;
+}
+
+
+.profile-form, .contact-form  {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  background-color: $white-colour;
+  border-radius: 10px;
+  
+  a {
+      color: $primary-text-colour;
+  }
+}
+
+.card-body {
+  min-height: 100%;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                    Responsive 
+-----------------------------------------------------------------------------------------------------------------------------  */
+     
+.mobile-block {
+  display: none; 
+}
+
+@media (max-width: 1200px) {
+  /* tablet devices */
+}
+@media (max-width: 992px) {
+  /* small tablet devices */
+  .slider-main .item-slide {
+    height: auto;
+  }
+
+  .table-shopping-cart tr td:first-child {
+    width: 250px;
+  }
+  .table-shopping-cart .itemside .info {
+    padding: 0;
+  }
+  .table-shopping-cart .itemside .aside {
+    display: none;
+  }
+}
+@media all and (max-width: 768px) {
+  /* mobile devices */
+  .mobile-block {
+    display: block;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  .section-header .logo {
+    max-height: 40px;
+    width: auto;
+  }
+  .section-header .header-main .brand-wrap {
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+  .section-header .header-main .search {
+    margin-bottom: 1rem;
+  }
+
+  .item-feature {
+    margin-bottom: 20px;
+  }
+
+  .mobile-order-first {
+    order: -1;
+  }
+
+  .mobile-order-1 {
+    order: 1;
+  }
+
+  .mobile-order-2 {
+    order: 2;
+  }
+
+  .mobile-order-3 {
+    order: 3;
+  }
+
+  .mobile-py {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .mobile-pb {
+    padding-bottom: 20px;
+  }
+
+  .mobile-pt {
+    padding-top: 20px;
+  }
+
+  .navbar-expand .navbar-collapse {
+    flex-direction: column;
+  }
+  
+  .form-button {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .register-form, .login-form, .reset-form {
+    margin: 0px 0px 20px 0px;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+    background-color: $white-colour;
+    border-radius: 10px;
+    
+    a {
+        color: $primary-text-colour;
+    }  
+  }
+  
+}
