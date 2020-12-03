@@ -33,6 +33,6 @@ def contact(request):
                 return HttpResponse('Invalid header found.')
             return redirect (contact)
         else:
-            form = contactForm()
+            messages.error(request, "There was a problem with your e-mail address, please double check it's correct.")
             return render(request, 'contact.html', {'form' : form})
     return render(request, "contact.html", {'form' : form})

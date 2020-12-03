@@ -4,5 +4,5 @@ from .views import contact
 
 # URLpatterns for the contact us app.
 urlpatterns = [
-    path('message', contact, name="contact"),
+    path('contact/', contact, name="contact"),
 ]

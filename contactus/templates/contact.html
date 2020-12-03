@@ -4,26 +4,34 @@
 
 <!--This is the page for users to submit any queries on a basic form. Uses Gmail to send the email.-->
 
-<div class="container">
-    <div class="contact-form">
+<div class="container mb-4 mt-4">
+    
+    <div class="card contact-form">
+        
+        <div class="contact-form-header form-title rounded">
+            <span class="form-text--header">Contact Us</span>
+            <span class="form-text--subtext">Get in touch with the form below.</span>
+        </div>
+            
+        <div class="form-body">
 
-        <p class="text-padding text-center">Please fill out the form below
-        and we'll try to get back to you as soon as possible.</p>
+            <hr class="hr-long--pink mt-4">
+            
+            <!--When the form is submitted it uses the url 'contact'-->
+            <form method="POST" action="{% url 'contact' %} ">
+                {% csrf_token %}
+                
+                {{ form | as_bootstrap }}
+                
+                <div class="text-center">
+                    <button type="submit" class="bubbly-button">Send Message</button>
+                </div>
+                
+            </form>
+        </div>
         
-        <hr class="hr-short--pink">
-        
-        <!--When the form is submitted it uses the url 'contact'-->
-        <form method="POST" action="{% url 'contact' %} ">
-            {% csrf_token %}
-            
-            {{ form | as_bootstrap }}
-            
-            <div class="text-center">
-                <button type="submit" class="btn btn-success btn-block">Send</button>
-            </div>
-            
-        </form>
     </div>
+
 </div>
 
 {% endblock %}
