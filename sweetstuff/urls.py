@@ -30,7 +30,7 @@ urlpatterns = [
     path('', include("home.urls")),
     path('accounts/', include(urls_accounts)),
     path('user/', include(urls_profiles)),
-    path('contact/', include(urls_contactus)),
+    path('', include(urls_contactus)),
     path('cart/', include(urls_cart)),
     path('products/', include(urls_products)),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='main/registration/password_reset_done.html'), name='password_reset_done'),

@@ -48,11 +48,7 @@
         			</div>
         			
         			<div class="widget-header icontext">
-        				
-        				{% if user.is_authenticated %}
-        					<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
-        				{% endif %}
-        				
+
         				<div class="text">
         					{% if user.is_authenticated %}
         						<span class="text-muted">Welcome {{ user.users.first_name }}!</span>	
@@ -102,7 +98,7 @@
           <a class="nav-link" href="{% url 'about' %}">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
         </li>
       </ul>
     </div> 
@@ -112,13 +108,12 @@
 
 <!--If any messages then they're displayed at the top of the page.-->
 {% if messages %}
-<div class="alert alert-success">
-    <div class="messages text-center">
-        {% for message in messages %} 
-            {{ message }} 
-        {% endfor %}
-    </div>
-</div>
+    {% for message in messages %} 
+    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     	<strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+ 	</div>
+    {% endfor %}
 {% endif %}
     
 <!--This is where the other templates are injected.-->

@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import env
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_forms_bootstrap',
+    'crispy_forms',
     'home',
     'userProfile',
     'accounts',
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     'products',
     
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -154,3 +157,8 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
 
 # Change who recieves the email in the env variable.
 DEFAULT_SEND_TO = os.getenv("DEFAULT_SEND_TO")
+
+# Messages tags to give error a red colour.
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
