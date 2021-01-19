@@ -3,7 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm
-from userProfile.models import UserProfile
+from userProfile.models import UserProfile, UserAddress
 from userProfile.urls import user_profile 
 
 
@@ -84,3 +84,8 @@ def makeProfile(request):
     upr = UserProfile()
     upr.user = request.user
     upr.save()
+    
+    """ This associates the newly created profile user table to the address table"""
+    uar = UserAddress()
+    uar.person = UserProfile.objects.get(user=upr.user)
+    uar.save()

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap_tags %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!--This is the page for users to submit any queries on a basic form. Uses Gmail to send the email.-->
@@ -21,7 +21,7 @@
             <form method="POST" action="{% url 'contact' %} ">
                 {% csrf_token %}
                 
-                {{ form | as_bootstrap }}
+                {{ form | crispy }}
                 
                 <div class="text-center">
                     <button type="submit" class="bubbly-button">Send Message</button>

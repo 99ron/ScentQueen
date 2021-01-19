@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.apps import apps
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -21,9 +22,7 @@ from django.conf.urls.static import static
 from accounts import urls as urls_accounts
 from userProfile import urls as urls_profiles
 from contactus import urls as urls_contactus
-from cart import urls as urls_cart
 from products import urls as urls_products
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,8 +30,9 @@ urlpatterns = [
     path('accounts/', include(urls_accounts)),
     path('user/', include(urls_profiles)),
     path('', include(urls_contactus)),
-    path('cart/', include(urls_cart)),
-    path('products/', include(urls_products)),
+    path('/item/', include(urls_products)),
+
+    # Password Reset links
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='main/registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="main/registration/password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='main/registration/password_reset_complete.html'), name='password_reset_complete'),

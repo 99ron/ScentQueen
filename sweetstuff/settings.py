@@ -14,6 +14,7 @@ import env
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,14 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_forms_bootstrap',
     'crispy_forms',
+    
+    'django.contrib.sites',
+    'django.contrib.flatpages',
+    
+    # Custom apps I've added to the project
     'home',
     'userProfile',
     'accounts',
     'contactus',
-    'cart',
     'products',
-    
-]
+    ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -89,10 +93,9 @@ WSGI_APPLICATION = 'sweetstuff.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
