@@ -195,6 +195,27 @@ a:link, a:visited {
   width: 20%;
   height: 1px; }
 
+.hidden {
+  display: none !important; }
+
+.form-field {
+  width: 250px;
+  display: inline-block;
+  padding: 5px; }
+
+.cart-row {
+  display: flex;
+  align-items: flex-stretch;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ececec; }
+
+.box-element {
+  box-shadow: #cccccc 0 0 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px; }
+
 .hr-long--pink {
   background-color: #d837ed66;
   width: 60%;
