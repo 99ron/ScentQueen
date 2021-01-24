@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from accounts import urls as urls_accounts
 from userProfile import urls as urls_profiles
 from contactus import urls as urls_contactus
-from products import urls as urls_products
+from store import urls as urls_store
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +30,7 @@ urlpatterns = [
     path('accounts/', include(urls_accounts)),
     path('user/', include(urls_profiles)),
     path('', include(urls_contactus)),
-    path('/item/', include(urls_products)),
+    path('', include(urls_store)),
 
     # Password Reset links
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='main/registration/password_reset_done.html'), name='password_reset_done'),
