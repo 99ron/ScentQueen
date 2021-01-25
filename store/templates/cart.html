@@ -16,21 +16,26 @@
         <thead class="text-muted">
             <tr class="small text-uppercase">
                 <th scope="col">Product</th>
-                <th scope="col" width="120">Quantity</th>
                 <th scope="col" width="120">Price</th>
-                <th scope="col" class="text-right d-none d-md-block" width="200"> </th>
+                <th scope="col" width="120">Quantity</th>
+                <th scope="col" width="200"> Total </th>
             </tr>
         </thead>
         <tbody>
+            {% for item in items %}
             <tr>
             	<td>
             		<figure class="itemside align-items-center">
-            			<div class="aside"><img src="#" class="img-sm"></div>
+            			<div class="aside"><img src="{{item.product.imageURL}}" class="img-sm"></div>
             			<figcaption class="info">
-            				<a href="#" class="title text-dark">Camera Canon EOS M50 Kit</a>
-            				<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
+            				<a href="" class="title text-dark">{{item.product.name}}</a>
             			</figcaption>
             		</figure>
+            	</td>
+            	<td>
+            		<div class="price-wrap">
+            			<p class="price">£{{item.product.price}}</p>
+            		</div> <!-- price-wrap .// -->
             	</td>
             	<td>
             		<div class="input-group input-spinner">
@@ -39,7 +44,7 @@
                             <button class="btn btn-light" type="button" id="button-plus" value="Increase Value" onclick="increaseValue()"> + </button>
                         </div>
                         
-                        <input type="text" class="form-control" value="1" placeholder="1" id="productAmount">
+                        <input type="text" class="form-control" value="{{item.quantity}}" placeholder="{{item.quantity}}" id="productAmount">
                         
                         <div class="input-group-append">
                             <button class="btn btn-light" type="button" id="button-minus" value="Decrease Value" onclick="decreaseValue()"> − </button>
@@ -47,17 +52,11 @@
                     
                     </div>  
             	</td>
-            	<td>
-            		<div class="price-wrap">
-            			<var class="price">$1156.00</var>
-            			<small class="text-muted"> $315.20 each </small>
-            		</div> <!-- price-wrap .// -->
-            	</td>
-            	<td class="text-right d-none d-md-block">
-            	<a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-            	<a href="" class="btn btn-light"> Remove</a>
+            	<td class="price-wrap">
+            	    <p class="price">£{{item.get_total}}</p>
             	</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
     
@@ -93,15 +92,7 @@
         <div class="card-body">
         		<dl class="dlist-align">
                     <dt>Total price:</dt>
-                    <dd class="text-right">$69.97</dd>
-        		</dl>
-        		<dl class="dlist-align">
-                    <dt>Discount:</dt>
-                    <dd class="text-right text-danger">- $10.00</dd>
-        		</dl>
-        		<dl class="dlist-align">
-                    <dt>Total:</dt>
-                    <dd class="text-right text-dark b"><strong>$59.97</strong></dd>
+                    <dd class="text-right">£{{order.get_cart_total|floatformat:2}}</dd>
         		</dl>
         		<hr>
         		<p class="text-center mb-3">
