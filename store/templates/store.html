@@ -35,31 +35,29 @@
                         
                         <hr>
                         
-                        <form method="post" action="#">
-                            {% csrf_token %}
-            				<div class="form-row">
-            					<div class="form-group col-xs">
-            						<div class="input-group input-spinner">
-            						    
-            						  <div class="input-group-prepend">
-            						    <button class="btn btn-light" type="button" id="button-plus" value="Increase Value" onclick="increaseValue()"> + </button>
-            						  </div>
-            						  
-            						  <input type="text" class="form-control" value="1" placeholder="1" id="productAmount">
-            						  
-            						  <div class="input-group-append">
-            						    <button class="btn btn-light" type="button" id="button-minus" value="Decrease Value" onclick="decreaseValue()"> − </button>
-            						  </div>
-            						  
-            						</div>  
-            					</div>
-            					
-            					<div class="form-group col-xs">
-            						<button type="submit" class="btn btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i> </button>
-            					</div> 
-            					
-            				</div> 
-            			</form>
+                    	<div class="form-row">
+        					<div class="form-group col-xs">
+        						<!--<div class="input-group input-spinner">-->
+        						    
+        						<!--  <div class="input-group-prepend">-->
+        						<!--    <button class="btn btn-light" type="button" id="button-plus" value="Increase Value" onclick="increaseValue()"> + </button>-->
+        						<!--  </div>-->
+        						  
+        						<!--  <input type="text" class="form-control" value="1" placeholder="1" id="productAmount">-->
+        						  
+        						<!--  <div class="input-group-append">-->
+        						<!--    <button class="btn btn-light" type="button" id="button-minus" value="Decrease Value" onclick="decreaseValue()"> − </button>-->
+        						<!--  </div>-->
+        						  
+        						<!--</div>  -->
+        					</div>
+        					
+        					<div class="form-group col-xs">
+        						<button data-product="{{product.id}}" data-action="add" class="btn btn-primary update-cart"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i> </button>
+        					</div> 
+        					
+        				</div> 
+            			
             			
             		</div> 
             	</div> 

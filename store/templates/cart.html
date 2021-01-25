@@ -41,13 +41,13 @@
             		<div class="input-group input-spinner">
                     
                         <div class="input-group-prepend">
-                            <button class="btn btn-light" type="button" id="button-plus" value="Increase Value" onclick="increaseValue()"> + </button>
+                            <button class="btn btn-light update-cart" type="button" id="button-plus" value="Increase Value" onclick="increaseValue()" data-product="{{item.product.id}}" data-action="add"> + </button>
                         </div>
                         
-                        <input type="text" class="form-control" value="{{item.quantity}}" placeholder="{{item.quantity}}" id="productAmount">
+                        <input readonly type="text" class="form-control" value="{{item.quantity}}" placeholder="{{item.quantity}}">
                         
                         <div class="input-group-append">
-                            <button class="btn btn-light" type="button" id="button-minus" value="Decrease Value" onclick="decreaseValue()"> − </button>
+                            <button class="btn btn-light update-cart" type="button" id="button-minus" value="Decrease Value" onclick="decreaseValue()" data-product="{{item.product.id}}" data-action="remove"> − </button>
                         </div>
                     
                     </div>  
