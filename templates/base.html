@@ -38,6 +38,40 @@
 		    return cookieValue;
 		}
 		var csrftoken = getToken('csrftoken');
+		
+		
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		
+		// Create variable to get cart from within the cookie.
+		var cart = JSON.parse(getCookie('cart'));
+		
+		// If 'cart' can't be found it'll create that variable and link it to the main domain,
+		// this prevents a new cart being created on each page while the user is browsing.
+		if (cart == undefined){
+			cart = {};
+			console.log('Cart Created!', cart);
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/";
+		}
+		console.log('Cart:', cart);
+		
     </script>
     
 </head>

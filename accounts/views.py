@@ -85,7 +85,7 @@ def makeProfile(request):
     upr.user = request.user
     upr.save()
     
-    """ This associates the newly created profile user table to the address table"""
+    """ This associates the newly created profile usertable to the address table"""
     uar = UserAddress()
     uar.person = UserProfile.objects.get(user=upr.user)
     uar.save()
