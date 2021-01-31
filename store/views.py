@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
-from .models import *
+import datetime
 
+from .models import *
+from userProfile.models import UserProfile
 # Views for the store, cart and checkout.
 
 def store(request):
     
     if request.user.is_authenticated:
-        customer = request.user.id
+        customer = UserProfile.objects.get(user=request.user)
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -29,7 +31,7 @@ def store(request):
 def cart(request):
     
     if request.user.is_authenticated:
-        customer = request.user.id
+        customer = UserProfile.objects.get(user=request.user)
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -37,6 +39,7 @@ def cart(request):
         # Create Empty cart for non logged in users (Temp)
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0}
+        cartItems = order['get_cart_items']
     context = {'items':items, 'order':order, 'cartItems':cartItems}
     return render(request, 'cart.html', context)
     
@@ -44,7 +47,7 @@ def cart(request):
     
 def checkout(request):
     if request.user.is_authenticated:
-        customer = request.user.id
+        customer = UserProfile.objects.get(user=request.user)
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -52,6 +55,7 @@ def checkout(request):
         # Create Empty cart for non logged in users (Temp)
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0}
+        cartItems = order['get_cart_items']
     context = {'items':items, 'order':order, 'cartItems':cartItems}
     return render(request, 'checkout.html', context)
     
@@ -65,7 +69,7 @@ def updateItem(request):
     print('Action: ', action)
     print('productId: ', productId)
     
-    customer = request.user.id
+    customer = UserProfile.objects.get(user=request.user)
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     
@@ -82,3 +86,33 @@ def updateItem(request):
         orderItem.delete()
     
     return JsonResponse('Item was added', safe=False)
+    
+    
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    
+    if request.user.is_authenticated:
+        customer = UserProfile.objects.get(user=request.user)
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if str(total) == str(order.get_cart_total):
+            order.complete = True
+        order.save()
+        
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            county=data['shipping']['county'],
+            postcode=data['shipping']['postcode'],
+            )
+        
+    else:
+        print("User is not logged in.")
+        
+    return JsonResponse('Payment Complete!', safe=False)

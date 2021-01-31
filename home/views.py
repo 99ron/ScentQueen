@@ -9,17 +9,35 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from store.models import *
+
 
 # Views for the home app.
 
 """ Simply returns the home.html file """
 def home(request):
-    return render(request, "home.html")
+	if request.user.is_authenticated:
+		customer = request.user.id
+		order, created = Order.objects.get_or_create(customer=customer, complete=False)
+		items = order.orderitem_set.all()
+		cartItems = order.get_cart_items
+	else:
+		# Create Empty cart for non logged in users (Temp)
+		items = []
+		order = {'get_cart_total':0, 'get_cart_items':0}
+		cartItems = order['get_cart_items']
+	cartItems = order.get_cart_items
+	context = {'cartItems': cartItems}
+	return render(request, "home.html", context)
+
+
 
 """ A view to show the about us page """
 def about(request):
 	return render(request, "about-us.html")
    
+
+
 
 # This is the password reset request, I will probably move this later on.
 def password_reset_request(request):
