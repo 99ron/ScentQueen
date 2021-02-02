@@ -45,6 +45,7 @@ function addCookieItem(productId, action){
     location.reload() 
 }
 
+
 // This updates the users order.
 function updateUserOrder(productId, action){
     console.log('User logged in, sending data...');

@@ -32,7 +32,7 @@ def cart(request):
     
     
 def checkout(request):
-
+  
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
