@@ -8,7 +8,7 @@ from .models import UserProfile, UserAddress
 class userProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['first_name', 'last_name', 'phone_number', 'gender' ]
+        fields = ['first_name', 'last_name', 'phone_number', 'email', 'gender' ]
         widgets = {'gender':forms.RadioSelect}
 
 

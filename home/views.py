@@ -24,11 +24,10 @@ def home(request):
 	context = {'cartItems': cartItems}
 	return render(request, "home.html", context)
 
+
 """ A view to show the about us page """
 def about(request):
 	return render(request, "about-us.html")
-   
-
 
 
 # This is the password reset request, I will probably move this later on.
