@@ -5,12 +5,18 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from contactus.forms import contactForm
 from home.views import home
+from store.utils import cookieCart, cartData
 
 # Views for the contact us app.
 
 def contact(request):
     if request.method == 'GET':
         form = contactForm()
+        data = cartData(request)
+        cartItems = data['cartItems']
+        
+        context = {'form' : form, 'cartItems': cartItems}
+	    
     else:
         """When a user submits the form it starts here. """
         form = contactForm(request.POST)
@@ -35,4 +41,4 @@ def contact(request):
         else:
             messages.error(request, "There was a problem with your e-mail address, please double check it's correct.")
             return render(request, 'contact.html', {'form' : form})
-    return render(request, "contact.html", {'form' : form})
+    return render(request, "contact.html", context)

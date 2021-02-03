@@ -5,6 +5,7 @@ from .models import UserProfile, UserAddress
 from django.contrib.auth.decorators import login_required
 from home.views import home
 from .forms import userProfileForm, userAddressForm
+from store.utils import cookieCart, cartData
 
 # User Profile Function
 @login_required
@@ -14,6 +15,7 @@ def user_profile(request):
     This gets the profile page for the logged in User.
     If it doesn't exist it'll return to the homepage.
     '''
+    
     
     if request.user.is_authenticated:
     
@@ -29,13 +31,19 @@ def user_profile(request):
             """The user's profile"""
             formUser = userProfileForm(instance=user)
             
+            data = cartData(request)
+            cartItems = data['cartItems']
+        
+            
             # This matches the logged in user to the address table which then renders the form with the correct data.
             try:
                 address = UserAddress.objects.get(person=user)
                 formAddress = userAddressForm(instance=address)
             except:
                 formAddress = userAddressForm()   
-                
+             
+            context = {'formUser' : formUser,'formAddress' : formAddress, 'profile' : user, 'cartItems': cartItems}
+              
         else:
             # Requests the form and files data.
             formUser = userProfileForm(request.POST)
@@ -44,15 +52,15 @@ def user_profile(request):
             if formUser.is_valid() and formAddress.is_valid():
                 
                 # Sets the unique user profile instance up. 
-                # address = UserAddress.objects.get(person=user)
+                address = UserAddress.objects.get(person=user)
                 up = user
-                ua = formAddress
+                ua = address
+                
                 try:
                     up.first_name = formUser.cleaned_data['first_name']
                     up.last_name = formUser.cleaned_data['last_name']
                     up.phone_number = formUser.cleaned_data['phone_number']
                     up.gender = formUser.cleaned_data['gender']
-                    up.email = formUser.cleaned_data['email']
                     
                     ua.town_city = formAddress.cleaned_data['town_city']
                     ua.street_address1 = formAddress.cleaned_data['street_address1']
@@ -62,16 +70,15 @@ def user_profile(request):
   
                     up.save()
                     ua.save()
-                    
                     messages.success(request, "Your profile was updated successfully!")
                     return redirect(user_profile)
                     
                 except Exception as e:
                     # If an error occurs it throws up a message and asks to retry.
                     messages.error(request, "Failed to update: " + str(e))
-                    return render(request, 'profile.html', {'formUser' : formUser, 'formAddress' : formAddress, 'profile' : user})
+                    return render(request, 'profile.html', context)
                     
-        return render(request, 'profile.html', {'formUser' : formUser,'formAddress' : formAddress, 'profile' : user})
+        return render(request, 'profile.html', context)
     
     # If the user isn't logged in then redirect them to the log in page.
     else:
@@ -82,5 +89,9 @@ def user_profile(request):
 @login_required
 def my_orders(request):
     
-    
-    return render(request, 'my-orders.html')
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    context = {'cartItems': cartItems}
+	
+    return render(request, 'my-orders.html', context)

@@ -16,7 +16,7 @@ $background-colour: #54b4eb;
 $hr-colour: #4bb7ff;
 $font-family: "Montserrat";
 $form-colour: #f9f9f9;
-
+$border-colour: #d0d0d0;
 
 /* -----------------------------------------------------------------------------------------------------------------------------   
                                                                                                                         Body 
@@ -352,7 +352,7 @@ a:link, a:visited {
 } 
 
 .profile-form {
-  margin-top: 70px;
+  // margin-top: 70px;
   margin-bottom: 70px;
   padding: 50px;
   background-color: $white-colour;
@@ -360,6 +360,7 @@ a:link, a:visited {
   -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  border: 1px $border-colour solid;
   
   a {
       color: $primary-text-colour;

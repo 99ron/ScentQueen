@@ -9,79 +9,95 @@
 
 <!-- This is the container for the profile form. Simple but effective. -->
 <div class="container">
-    <div class="profile-form">
-        
-        <div class="profile-form-header form-title rounded">
-            <span class="form-text--header">{{ user.users.first_name }}'s Profile</span>
-            <span class="form-text--subtext">Please check the details below are correct as they will be used for all deliveries.</span>
-        </div>
-        
-        <hr class="hr-long--pink mt-5 mb-3">
-        <!--Simple form for the user profile to be displayed-->
-        
-        <h2 class="text-center"> Personal Details </h2>
+    <div class="row">
+        <aside class="col-sm-12 col-md-3 mb-3">
+    		<!--   SIDEBAR   -->
+    		<ul class="list-group">
+    			<a class="list-group-item active"> Personal Details </a>
+    			<a class="list-group-item" href="{% url 'my_orders' %}"> My Orders </a>
+    		</ul>
+    		<!--   SIDEBAR .//END   -->
+    	</aside>
+    	
+    	<hr class="hr-short--pink d-none d-sm-block d-md-none">
+    	
+        <div class="profile-form col-sm-12  col-md-9">
             
-        <hr class="hr-short--pink">
-        
-        <!-- The form -->
-        <form method="POST">
-            {% csrf_token %} 
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ formUser.first_name|as_crispy_field }}
-                </div>
-                
-                <div class="form-group col-md-6">
-                    {{ formUser.last_name|as_crispy_field }}
-                </div>
+            <div class="profile-form-header form-title rounded">
+                <span class="form-text--header">{{ user.users.first_name }}'s Profile</span>
+                <span class="form-text--subtext">Please check the details below are correct as they will be used for all deliveries.</span>
             </div>
             
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ formUser.phone_number|as_crispy_field }}
-                </div>
-                
-                <div class="form-group col-md-6">
-                    <div class="custom-control custom-radio">
-                        {{ formUser.gender|as_crispy_field }}
-                    </div>
-                    
-                </div>
-            </div>
-
-
-            <h2 class="text-center"> Address Details</h2>
+            <hr class="hr-long--pink mt-5 mb-3">
+            <!--Simple form for the user profile to be displayed-->
             
+            <h2 class="text-center"> Personal Details </h2>
+                
             <hr class="hr-short--pink">
             
-            {{ formAddress.street_address1|as_crispy_field}}    
-            {{ formAddress.street_address2|as_crispy_field}} 
-         
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ formAddress.town_city|as_crispy_field }}
+            <!-- The form -->
+            <form method="POST">
+                {% csrf_token %} 
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ formUser.first_name|as_crispy_field }}
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        {{ formUser.last_name|as_crispy_field }}
+                    </div>
                 </div>
                 
-                <div class="form-group col-md-3">
-                    {{ formAddress.postcode|as_crispy_field }}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ formUser.phone_number|as_crispy_field }}
+                    </div>
+                    
+                     <div class="form-group col-md-6">
+                        {{ formUser.email|as_crispy_field }}
+                    </div>
+                    
+                    
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <div class="custom-control custom-radio">
+                            {{ formUser.gender|as_crispy_field }}
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <h2 class="text-center"> Address Details</h2>
                 
-                <div class="form-group col-md-3">
-                    {{ formAddress.country|as_crispy_field }}
+                <hr class="hr-short--pink">
+                
+                {{ formAddress.street_address1|as_crispy_field}}    
+                {{ formAddress.street_address2|as_crispy_field}} 
+             
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ formAddress.town_city|as_crispy_field }}
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        {{ formAddress.postcode|as_crispy_field }}
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        {{ formAddress.country|as_crispy_field }}
+                    </div>
                 </div>
-            </div>
-
-            <div class="text-center">
-                <button type="submit" class="btn btn-success mt-2 mb-4">Update</button>
-            </div>
-        
+    
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success mt-2 mb-4">Update</button>
+                </div>
             
-        </form>
-
+                
+            </form>
+    
+        </div>
+        </div>
     </div>
-</div>
-
-
-
 {% endblock %}

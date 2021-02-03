@@ -29,19 +29,19 @@
 						<hr>
 
 						<div class="form-field">
-							<input class="form-control" type="text" name="address1" placeholder="First line of address.." {% if user.is_authenticated %} value="{{ user.users.userProfile.street_address1 }}" {% endif %}>
+							<input required class="form-control" type="text" name="address1" placeholder="First line of address.." {% if user.is_authenticated %} value="{{ user.users.userProfile.street_address1 }}" {% endif %}>
 						</div>
 						<div class="form-field">
 							<input class="form-control" type="text" name="address2" placeholder="Second line of address.." {% if user.is_authenticated %} value="{{ user.users.userProfile.street_address2 }}" {% endif %}>
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="city" placeholder="City.." {% if user.is_authenticated %} value="{{ user.users.userProfile.town_city }}" {% endif %}>
+							<input required class="form-control" type="text" name="city" placeholder="City.." {% if user.is_authenticated %} value="{{ user.users.userProfile.town_city }}" {% endif %}>
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="postcode" placeholder="Postcode.." {% if user.is_authenticated %} value="{{ user.users.userProfile.postcode }}" {% endif %}>
+							<input required class="form-control" type="text" name="postcode" placeholder="Postcode.." {% if user.is_authenticated %} value="{{ user.users.userProfile.postcode }}" {% endif %}>
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="county" placeholder="Country.." {% if user.is_authenticated %} value="{{ user.users.userProfile.country }}" {% endif %}>
+							<input required class="form-control" type="text" name="county" placeholder="Country.." {% if user.is_authenticated %} value="{{ user.users.userProfile.country }}" {% endif %}>
 						</div>
 					</div>
 
