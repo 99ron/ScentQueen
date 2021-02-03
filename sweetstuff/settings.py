@@ -187,6 +187,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
 # Change who recieves the email in the env variable.
 DEFAULT_SEND_TO = os.getenv("DEFAULT_SEND_TO")
 
+
 # Messages tags to give error a red colour.
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
