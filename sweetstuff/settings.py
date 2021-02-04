@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0825d3fb6bc043ce9f3ab28e4e45c6a8.vfs.cloud9.eu-west-2.amazonaws.com']
+ALLOWED_HOSTS = ['0825d3fb6bc043ce9f3ab28e4e45c6a8.vfs.cloud9.eu-west-2.amazonaws.com','https://scentqueen.herokuapp.com/']
 
 
 # Application definition
@@ -158,13 +158,15 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # s3 public media settings
 PUBLIC_MEDIA_LOCATION = 'media'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'scentqueen.storage_backends.PublicMediaStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 STATIC_ROOT = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_URL = '/static/'
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
