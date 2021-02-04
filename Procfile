@@ -1,1 +1,1 @@
-web: gunicorn autowrap.wsgi:application
+web: gunicorn application:app
