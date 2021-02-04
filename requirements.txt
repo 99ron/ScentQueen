@@ -10,6 +10,7 @@ awscli==1.18.153
 Babel==2.9.0
 backcall==0.2.0
 beautifulsoup4==4.9.3
+boto3==1.17.0
 bleach==3.2.1
 blinker==1.4
 certifi==2020.12.5
