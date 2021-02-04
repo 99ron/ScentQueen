@@ -1,1 +1,1 @@
-web: gunicorn sweetscent:app
+web: gunicorn sweetstuff:app
