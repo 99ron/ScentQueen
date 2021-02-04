@@ -1,1 +1,1 @@
-web: gunicorn sweetstuff.wsgi:app
+web: gunicorn sweetstuff.wsgi:application
