@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0825d3fb6bc043ce9f3ab28e4e45c6a8.vfs.cloud9.eu-west-2.amazonaws.com','https://scentqueen.herokuapp.com/']
+ALLOWED_HOSTS = ['0825d3fb6bc043ce9f3ab28e4e45c6a8.vfs.cloud9.eu-west-2.amazonaws.com','scentqueen.herokuapp.com']
 
 
 # Application definition
