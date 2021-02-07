@@ -109,37 +109,35 @@ def updateItem(request):
     
 
 def processOrder(request):
-    # transaction_id = datetime.datetime.now().timestamp()
-    # data = json.loads(request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
     
-    # if request.user.is_authenticated:
+    if request.user.is_authenticated:
         
-    #     customer = UserProfile.objects.get(user=request.user)
-    #     order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        customer = UserProfile.objects.get(user=request.user)
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
         
-    # else:
-    #     customer, order = guestOrder(request, data)
+    else:
+        customer, order = guestOrder(request, data)
     
-    # ShippingAddress.objects.create(
-    #     customer=customer,
-    #     order=order,
-    #     address1=data['shipping']['address1'],
-    #     address2=data['shipping']['address2'],
-    #     city=data['shipping']['city'],
-    #     county=data['shipping']['county'],
-    #     postcode=data['shipping']['postcode'],
-    #     )
+    ShippingAddress.objects.create(
+        customer=customer,
+        order=order,
+        address1=data['shipping']['address1'],
+        address2=data['shipping']['address2'],
+        city=data['shipping']['city'],
+        county=data['shipping']['county'],
+        postcode=data['shipping']['postcode'],
+        )
       
-    # total = float(data['form']['total'])
-    # order.transaction_id = transaction_id
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
     
     # This checks that the price hasn't been manipulated by checking the total on the page compared to
     # the orders total cart cost.
-    # if str(total) == str(order.get_cart_total):
-    #     order.complete = True
-    # order.save()
-    
-    print('Data: ', request.body)
-    
+    if str(total) == str(order.get_cart_total):
+        order.complete = True
+    order.save()
+
     return JsonResponse('Payment Complete!', safe=False)
     
