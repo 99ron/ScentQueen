@@ -19,7 +19,7 @@ for (var i = 0; i < updateBtns.length; i++) {
         });
 }
 
-
+// This updates the cart for a non logged in user -- Cookie based.
 function addCookieItem(productId, action){
     console.log("Not logged in..");
     

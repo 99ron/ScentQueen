@@ -4,17 +4,54 @@ import json
 import datetime
 
 from .models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .utils import cookieCart, cartData, guestOrder
 from userProfile.models import UserProfile
 # Views for the store, cart and checkout.
 
+
+# Simple function to order the shop results
+def shop_sort_by(sort_by):
+    
+    if sort_by == "Wax Melts":
+        # If sort_by contains WaxMelts it'll display the results.
+        order_list = Product.objects.all().order_by('-product_type')
+    
+    elif sort_by == "Car Scents":
+        # If sort_by contains Newest it'll display the results Newest first.
+        order_list = Product.objects.all().order_by('product_type')
+    
+    return order_list
+
+
 def store(request):
+    
+    sort_by = request.GET.get('orderSortBy')
+    
+    if sort_by == None:
+        order_list = Product.objects.all()
+    else:
+        # Passes the variable to the function so it can be filtered above. 
+        order_list = shop_sort_by(sort_by)
+    
     
     data = cartData(request)
     cartItems = data['cartItems']
     
-    products = Product.objects.all()
-    context = { 'products':products, 'cartItems':cartItems}
+    # This is to limit the amount that's shown on a page using pagination only showing 9 per page.
+    page = request.GET.get('page', 1)
+    paginator = Paginator(order_list, 9)
+    
+    try:
+        shop_list = paginator.page(page)
+    except PageNotAnInteger:
+        shop_list = paginator.page(1)
+    except EmptyPage:
+        shop_list = paginator.page(paginator.num_pages)
+    
+    
+
+    context = { 'products':order_list, 'cartItems':cartItems, 'sort_by':sort_by, 'shop_list':shop_list}
     return render(request, 'store.html', context)
 
 
@@ -72,32 +109,37 @@ def updateItem(request):
     
 
 def processOrder(request):
-    transaction_id = datetime.datetime.now().timestamp()
-    data = json.loads(request.body)
+    # transaction_id = datetime.datetime.now().timestamp()
+    # data = json.loads(request.body)
     
-    if request.user.is_authenticated:
+    # if request.user.is_authenticated:
         
-        customer = UserProfile.objects.get(user=request.user)
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    #     customer = UserProfile.objects.get(user=request.user)
+    #     order, created = Order.objects.get_or_create(customer=customer, complete=False)
         
-    else:
-        customer, order = guestOrder(request, data)
+    # else:
+    #     customer, order = guestOrder(request, data)
     
-    ShippingAddress.objects.create(
-        customer=customer,
-        order=order,
-        address1=data['shipping']['address1'],
-        address2=data['shipping']['address2'],
-        city=data['shipping']['city'],
-        county=data['shipping']['county'],
-        postcode=data['shipping']['postcode'],
-        )
+    # ShippingAddress.objects.create(
+    #     customer=customer,
+    #     order=order,
+    #     address1=data['shipping']['address1'],
+    #     address2=data['shipping']['address2'],
+    #     city=data['shipping']['city'],
+    #     county=data['shipping']['county'],
+    #     postcode=data['shipping']['postcode'],
+    #     )
       
-    total = float(data['form']['total'])
-    order.transaction_id = transaction_id
-
-    if str(total) == str(order.get_cart_total):
-        order.complete = True
-    order.save()
-        
+    # total = float(data['form']['total'])
+    # order.transaction_id = transaction_id
+    
+    # This checks that the price hasn't been manipulated by checking the total on the page compared to
+    # the orders total cart cost.
+    # if str(total) == str(order.get_cart_total):
+    #     order.complete = True
+    # order.save()
+    
+    print('Data: ', request.body)
+    
     return JsonResponse('Payment Complete!', safe=False)
+    

@@ -3,9 +3,16 @@ from userProfile.models import UserProfile
 
 # models for the products
 
+PRODUCT_CATEGORY = (
+    ("WaxMelts", "Wax Melts"),
+    ("Car Scents", "Car Scents"),
+    )
+
+
 class Product(models.Model):
     name = models.CharField(max_length=254, default='')
     description = models.TextField()
+    product_type = models.CharField(max_length=50, choices= PRODUCT_CATEGORY)
     price =  models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     

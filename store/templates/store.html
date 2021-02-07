@@ -3,36 +3,88 @@
 {% block page_heading %} Mainpage {% endblock %}
 {% block content %}
 {% load static %}
+<div class="container">
+    
+    <div class="card-body d-flex">
+    	<div class="form mr-auto">
+    	    
+	    <form action="{% url 'store' %}" method="GET">
+        		
+    		<select name="orderSortBy" class="ml-2 form-control">
+    		    
+    		    <option value="Wax Melts" {% if sort_by == "Wax Melts" %} selected="selected"{% endif %}>Sort by: Wax Melts</option>
+                <option value="Car Scents" {% if sort_by == "Car Scents" %} selected="selected"{% endif %}>Sort by: Car Scents</option>
 
-<div class="row-flex">
-
-    <div class="container">
-        
-        <div class="row">
-        {% for product in products %}    
-            <div class="col-md-4 col-sm-6">
-                
-        		<figure class="card card-product-grid">
-        			<a href="#" class="img-wrap">
-        				<img src="{{MEDIA_URL}}{{ product.image }}">
-        			</a>
-        			
-        			<figcaption class="info-wrap">
-        				<a href="#" class="title">{{ product.name }}</a>
-        				<small class="text-muted">Pack of 4</small>
-        				<div class="mt-2">
-        					<var class="price">£{{ product.price|floatformat:2 }}</var> <!-- price-wrap.// -->
-        					<a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-sm btn-outline-primary float-right update-cart">Add to cart <i class="fa fa-shopping-cart"></i></a>
-        				</div> <!-- action-wrap.end -->
-        			</figcaption>
-        			
-        		</figure> <!-- card // -->
-        	</div> <!-- col.// -->
-        	{% endfor %}
-        </div>
-        
+    		</select> 
+    		
+    	</div>
+    	
+    	<div class="btn-group" role="group" aria-label="Filter by">
+    	  <button type="submit" class="btn btn-outline-primary btn-sort-by">Sort</button>
+    	</div>
+    	
+    	</form>
     </div>
+    
+    <hr>
+    
+    <div class="d-flex">
+        
+    {% for product in products %}    
+        <div class="col-md-4 col-sm-6">
+            
+    		<figure class="card card-product-grid">
+    			<a href="#" class="img-wrap">
+    				<img class="img-thumbnail" src="{{MEDIA_URL}}{{ product.image }}">
+    			</a>
+ 
+    			<figcaption class="info-wrap">
+    				<a href="#" class="title">{{ product.name }}</a>
+    				<small class="text-muted">Pack of 4</small>
+    				<div class="mt-2">
+    					<var class="price">£{{ product.price|floatformat:2 }}</var> <!-- price-wrap.// -->
+    					<a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-sm btn-outline-primary float-right update-cart">Add to cart <i class="fa fa-shopping-cart"></i></a>
+    				</div> 
+    			</figcaption>
+    			
+    		</figure> 
+    	</div> 
+    	{% endfor %}
+    </div>
+    
+     <!--This checks to see if there's more than 1 page worth of results (set to 3) to then display the option to view the next 'page'.-->
+    <div class="pagination-container">
+        {% if shop_list.has_other_pages %}
+
+        <ul class="pagination">
+            {% if shop_list.has_previous %}
+                <li><a href="?page={{ shop_list.previous_page_number }}{% if sort_by %}&orderSortBy={{ sort_by }}{% endif %}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %} 
+            
+            {% for i in shop_list.paginator.page_range %} 
+                {% if shop_list.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span>
+                    </li>
+                {% else %}
+                    <li><a href="?page={{ i }}{% if sort_by %}&orderSortBy={{ sort_by }}{% endif %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if shop_list.has_next %}
+                <li><a href="?page={{ shop_list.next_page_number }}{% if sort_by %}&orderSortBy={{ sort_by }}{% endif %}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+
+        {% endif %}
+    </div>
+    
+    
 </div>
+
 
 
 {% endblock %}

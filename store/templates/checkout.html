@@ -95,9 +95,6 @@ var total = '{{order.get_cart_total}}'
 
 <!-- Takes the data from above to then pass it through the rest of the JS below and PayPal -->
 <script type="text/javascript">
-
-
-
 paypal.Buttons({
 	
 	style:{
@@ -128,7 +125,75 @@ paypal.Buttons({
 }).render('#paypal-button-container');
 </script>
 
-<!-- External JS file just for this page -->
-<script type="text/javascript" src="{% static 'js/checkout-page-scripts.js' %} "></script>
+<!-- This collects the data from the page and then processes that information to confirm the order has not been
+tampered with and the sets the order as complete, as which point then redirects the user to their order page. --> 
+<script type="text/javascript">
+	var form = document.getElementById('form');
+
+crsftoken = form.getElementsByTagName("input")[0].value;
+console.log("NewToken: ", form.getElementsByTagName("input")[0].value);
+
+form.addEventListener('submit', function(e){
+	e.preventDefault();
+	console.log('Form submitted...');
+	document.getElementById('form-button').classList.add('hidden');
+	document.getElementById('payment-info').classList.remove('hidden');
+});
+
+
+function submitFormData(){
+	console.log('Payment button clicked');
+	console.log('Total: ', total);
+	
+	var userFormData = {
+		'name':form.name.value,
+		'email':form.email.value,
+		'total':total,
+	};
+	
+	var shippingInfo = {
+		'address1':null,
+		'address2':null,
+		'city':null,
+		'county':null,
+		'postcode':null,
+	};
+	
+	if(shipping != 'False'){
+		shippingInfo.address1 = form.address1.value;
+		shippingInfo.address2 = form.address2.value;
+		shippingInfo.city = form.city.value;
+		shippingInfo.county = form.county.value;
+		shippingInfo.postcode = form.postcode.value;
+	}
+	
+	if(user == 'AnonymousUser'){
+		userFormData.name = form.name.value;
+		userFormData.email = form.email.value;
+		}
+
+
+	var url = '/process_order/';
+	fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type':'application/json',
+			'X-CSRFToken':csrftoken,
+		},
+		body: JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+	})
+	.then((response) => response.json())
+	.then((data) => {
+		console.log('Success:', data);
+		alert('Transaction completed');
+		
+		// cart= {};
+		// document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
+
+		window.location.href = "{% url 'my_orders' %}";
+
+	});
+}	
+</script>-->
 
 {% endblock %}

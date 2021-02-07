@@ -298,6 +298,13 @@ a:link, a:visited {
 
 }
 
+.order-sort-container {
+    margin-top: 20px;
+    
+    .btn-sort-by {
+        width: 100%;
+    }
+}
 
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
@@ -316,6 +323,11 @@ a:link, a:visited {
 .text-padding {
   padding-top: 15px;  
   padding-bottom: 15px;
+}
+
+// Pagination list display.
+.pagination-container {
+    text-align: center;
 }
 
 .login-form, .reset-form {
