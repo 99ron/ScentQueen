@@ -112,6 +112,7 @@ def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
     
+    
     if request.user.is_authenticated:
         
         customer = UserProfile.objects.get(user=request.user)
@@ -120,7 +121,7 @@ def processOrder(request):
     else:
         customer, order = guestOrder(request, data)
     
-    ShippingAddress.objects.create(
+    SA = ShippingAddress.objects.create(
         customer=customer,
         order=order,
         address1=data['shipping']['address1'],
@@ -129,7 +130,22 @@ def processOrder(request):
         county=data['shipping']['county'],
         postcode=data['shipping']['postcode'],
         )
-      
+    SA.save()
+    
+    # Getting an instance of the just processed shipping address.
+    savingAddress = ShippingAddress.objects.get(pk=SA.pk)
+    
+    PO = ProcessedOrders.objects.create(
+        customer=customer,
+        order=order,
+        shipping_address=savingAddress,
+        full_name=data['form']['name'],
+        email_address=data['form']['email'],
+        total_price=data['form']['total'],
+        )
+    
+    PO.save()
+    
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
     
@@ -138,6 +154,6 @@ def processOrder(request):
     if str(total) == str(order.get_cart_total):
         order.complete = True
     order.save()
-
+    
     return JsonResponse('Payment Complete!', safe=False)
     

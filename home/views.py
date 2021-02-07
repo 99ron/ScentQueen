@@ -26,6 +26,8 @@ def home(request):
 
 
 """ A view to show the about us page """
+
+# This renders the user to the 'about us' page.
 def about(request):
 	
 	data = cartData(request)

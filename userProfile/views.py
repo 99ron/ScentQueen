@@ -3,9 +3,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import UserProfile, UserAddress
 from django.contrib.auth.decorators import login_required
+
 from home.views import home
 from .forms import userProfileForm, userAddressForm
 from store.utils import cookieCart, cartData
+from store.models import ProcessedOrders
 
 # User Profile Function
 @login_required
@@ -98,7 +100,9 @@ def my_orders(request):
     
     data = cartData(request)
     cartItems = data['cartItems']
-
-    context = {'cartItems': cartItems}
-	
+    
+    user = request.user.id
+    orders = ProcessedOrders.objects.filter(customer=user)
+    
+    context = {'cartItems': cartItems, 'orders':orders}
     return render(request, 'my-orders.html', context)

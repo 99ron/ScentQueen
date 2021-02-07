@@ -5,7 +5,7 @@ from userProfile.models import UserProfile
 
 PRODUCT_CATEGORY = (
     ("WaxMelts", "Wax Melts"),
-    ("Car Scents", "Car Scents"),
+    ("CarScents", "Car Scents"),
     )
 
 
@@ -78,4 +78,14 @@ class ShippingAddress(models.Model):
         return "Order: {0} by {1}".format(self.order, self.customer)
         
 
-
+class ProcessedOrders(models.Model):
+    customer = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    shipping_address = models.ForeignKey(ShippingAddress, on_delete=models.SET_NULL, null=True)
+    full_name = models.CharField(max_length=80, null=False)
+    email_address = models.EmailField(max_length=200, null=False)
+    total_price = models.DecimalField(max_digits=6, decimal_places=3, null=False)
+    posted = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return "Customer: {0}, Order Number: {1}, Posted?: {2}".format(self.customer, self.order, self.posted)

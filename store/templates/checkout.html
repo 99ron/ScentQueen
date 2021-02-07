@@ -14,7 +14,7 @@
 					{% csrf_token %}
 					<div id="user-info">
 						<div class="form-field">
-							<input required class="form-control" type="text" name="name" placeholder="Name.." {% if user.is_authenticated %} value="{{ user.users.first_name }}" {% endif %}>
+							<input required class="form-control" type="text" name="name" placeholder="Name.." {% if user.is_authenticated %} value="{{ user.users.first_name }} {{ user.users.last_name }}" {% endif %}>
 						</div>
 								
 						<div class="form-field">
@@ -87,9 +87,9 @@
 
 <!--Script to gather data on this page -->
 <script type="text/javascript">
-var total = '{{order.get_cart_total}}'
-var shipping = '{{order.shipping}}'
-var total = '{{order.get_cart_total}}'
+
+var total = '{{order.get_cart_total}}';
+var shipping = '{{order.shipping}}';
 
 </script>
 
@@ -194,6 +194,6 @@ function submitFormData(){
 
 	});
 }	
-</script>-->
+</script>
 
 {% endblock %}
