@@ -51,8 +51,15 @@ def user_profile(request):
             
             if formUser.is_valid() and formAddress.is_valid():
                 
-                # Sets the unique user profile instance up. 
-                address = UserAddress.objects.get(person=user)
+                # Sets the unique user profile instance up.
+                try:
+                    address = UserAddress.objects.get(person=user)
+                except:
+                    uar = UserAddress()
+                    uar.person = UserProfile.objects.get(user=user)
+                    uar.save()
+                    
+                address = UserAddress.objects.get(person=user)    
                 up = user
                 ua = address
                 

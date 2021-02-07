@@ -193,8 +193,7 @@
 				<aside class="col-sm-12 col-md-4">
 					<h6 class="title">The Scent Quuen</h6>
 					<ul class="list-unstyled">
-						<li> <a href="#">About us</a></li>
-						<li> <a href="#">Find a store</a></li>
+						<li> <a href="{% url 'about'%}">About us</a></li>
 						<li> <a href="#">Terms and Conditions</a></li>
 					</ul>
 				</aside>
@@ -202,9 +201,9 @@
 				<aside class="col-sm-12 col-md-4">
 					<h6 class="title">Account</h6>
 					<ul class="list-unstyled">
-						<li> <a href="#"> User Login </a></li>
-						<li> <a href="#"> User register </a></li>
-						<li> <a href="#"> My Orders </a></li>
+						<li> <a href="{% url 'login' %}"> User Login </a></li>
+						<li> <a href="{% url 'register' %}"> User register </a></li>
+						<li> <a href="{% url 'my_orders' %}"> My Orders </a></li>
 					</ul>
 				</aside>
 				
