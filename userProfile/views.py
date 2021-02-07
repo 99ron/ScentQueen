@@ -69,6 +69,7 @@ def user_profile(request):
                     up.first_name = formUser.cleaned_data['first_name']
                     up.last_name = formUser.cleaned_data['last_name']
                     up.phone_number = formUser.cleaned_data['phone_number']
+                    up.email = formUser.cleaned_data['email']
                     up.gender = formUser.cleaned_data['gender']
                     
                     ua.town_city = formAddress.cleaned_data['town_city']
