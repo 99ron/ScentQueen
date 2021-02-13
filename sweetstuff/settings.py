@@ -165,12 +165,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     )
 
-
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIAFILES_LOCATION = 'media'
-
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Email info for the contact us and password reset functions.
