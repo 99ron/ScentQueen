@@ -38,7 +38,7 @@
 							<input required class="form-control" type="text" name="city" placeholder="City.." {% if user.is_authenticated %} value="{{ user.users.userProfile.town_city }}" {% endif %}>
 						</div>
 						<div class="form-field">
-							<input required class="form-control" type="text" name="postcode" placeholder="Postcode.." {% if user.is_authenticated %} value="{{ user.users.userProfile.postcode }}" {% endif %}>
+							<input required class="form-control" type="text" name="postcode" placeholder="Postcode.." maxlength="7" {% if user.is_authenticated %} value="{{ user.users.userProfile.postcode }}" {% endif %}>
 						</div>
 						<div class="form-field">
 							<input required class="form-control" type="text" name="county" placeholder="Country.." {% if user.is_authenticated %} value="{{ user.users.userProfile.country }}" {% endif %}>
@@ -74,7 +74,8 @@
 				</div>
 				{% endfor %}
 				<h5>Items: {{order.get_cart_items}} </h5>
-				<h5>Total: £{{order.get_cart_total|floatformat:2}} </h5>
+				<h5 id="post">Postage: </h5>
+				<h5 id="totalPrice">Total: £{{order.get_cart_total|floatformat:2}} </h5>
 			</div>
 		</div>
 	</div>
@@ -138,6 +139,16 @@ form.addEventListener('submit', function(e){
 	console.log('Form submitted...');
 	document.getElementById('form-button').classList.add('hidden');
 	document.getElementById('payment-info').classList.remove('hidden');
+	
+	
+	// Deals with the postage costs.
+	if (form.city.value.toLowerCase() == 'selsey') {
+		document.getElementById('post').innerHTML += " Free";
+	} else {
+		document.getElementById('post').innerHTML += " £2.99";
+		total = {{order.get_cart_total|floatformat:2}} + 2.99;
+		document.getElementById('totalPrice').innerHTML = "Total: £"+total
+	}
 });
 
 
