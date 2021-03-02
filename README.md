@@ -1,5 +1,6 @@
 # The Scent Queen
 
+Hosted site on Heroku: https://scentqueen.herokuapp.com/
 
 # UX
 
