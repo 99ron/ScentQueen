@@ -9,7 +9,6 @@ from .utils import cookieCart, cartData, guestOrder
 from userProfile.models import UserProfile
 # Views for the store, cart and checkout.
 
-
 # Simple function to order the shop results
 def shop_sort_by(sort_by):
     
