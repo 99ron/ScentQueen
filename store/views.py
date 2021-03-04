@@ -159,4 +159,11 @@ def processOrder(request):
     order.save()
     
     return JsonResponse('Payment Complete!', safe=False)
+
+
+
+def orders_processed(request):
     
+    orders = ProcessedOrders.objects.all()
+    context = {'orders':orders}
+    return render(request, 'orders.html', context)
