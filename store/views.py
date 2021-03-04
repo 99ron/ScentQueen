@@ -149,9 +149,12 @@ def processOrder(request):
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
     
+    # Gets the price with postage to use as a check below.
+    totalWithPostage = float(order.get_cart_total) + float(2.99)
+    
     # This checks that the price hasn't been manipulated by checking the total on the page compared to
     # the orders total cart cost.
-    if str(total) == str(order.get_cart_total):
+    if str(total) == str(order.get_cart_total) or str(total) == str(totalWithPostage):
         order.complete = True
     order.save()
     
