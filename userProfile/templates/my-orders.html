@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
-
 {% block content %}
-
 {% load static %}
 
 <div class="container">
@@ -11,12 +8,10 @@
     <div class="row">
         
     	<aside class="col-md-3">
-    		<!--   SIDEBAR   -->
     		<ul class="list-group">
     			<a class="list-group-item" href="{% url 'profile' %}"> Personal Details </a>
     			<a class="list-group-item active"> My Orders </a>
     		</ul>
-    		<!--   SIDEBAR .//END   -->
     	</aside>
     	
     	<hr class="hr-short--pink d-none d-sm-block d-md-none">

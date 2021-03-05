@@ -62,12 +62,9 @@ def guestOrder(request, data):
     cookieData = cookieCart(request)
     items = cookieData['items']
     
-    customer, created = UserProfile.objects.get_or_create(
-        email=email,
-        )
-    customer.first_name = name
-    customer.save()
-    
+    # This is the user id for an anon account I've created.
+    customer = UserProfile.objects.get(user=3)
+
     order = Order.objects.create(
         customer=customer,
         complete=False,
