@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib import messages
 import json
 import datetime
 
@@ -7,6 +8,8 @@ from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .utils import cookieCart, cartData, guestOrder
 from userProfile.models import UserProfile
+from contactus.views import order_posted_email
+
 # Views for the store, cart and checkout.
 
 # Simple function to order the shop results
@@ -157,12 +160,29 @@ def processOrder(request):
         order.complete = True
     order.save()
     
+    messages.success(request, "Thank you for your order, you will get an email when it's been dispatched.")
+    
     return JsonResponse('Payment Complete!', safe=False)
 
 
-
+# This gets all the orders to be displayed for the employer to process.
 def orders_processed(request):
     
     orders = ProcessedOrders.objects.all()
     context = {'orders':orders}
     return render(request, 'orders.html', context)
+ 
+    
+# This is to set the order as posted and will eventually notify the customer that it's been sent.
+def order_posted(request, orderId):
+
+    order = ProcessedOrders.objects.get(id=orderId)
+    order.posted = True
+    order.date_posted = datetime.datetime.now()
+    
+    # Send the neccessary info over to be emailed to customer
+    order_posted_email(order, request)
+    
+    order.save()
+    
+    return redirect(orders_processed)

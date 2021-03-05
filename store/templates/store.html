@@ -10,12 +10,12 @@
     	    
 	    <form action="{% url 'store' %}" method="GET">
         		
-    		<select name="orderSortBy" class="ml-2 form-control">
-    		    
-    		    <option value="Wax Melts" {% if sort_by == "Wax Melts" %} selected="selected"{% endif %}>Sort by: Wax Melts</option>
-                <option value="Car Scents" {% if sort_by == "Car Scents" %} selected="selected"{% endif %}>Sort by: Car Scents</option>
+		<select name="orderSortBy" class="ml-2 form-control">
+		    
+		    <option value="Wax Melts" {% if sort_by == "Wax Melts" %} selected="selected"{% endif %}>Sort by: Wax Melts</option>
+            <option value="Car Scents" {% if sort_by == "Car Scents" %} selected="selected"{% endif %}>Sort by: Car Scents</option>
 
-    		</select> 
+		</select> 
     		
     	</div>
     	
@@ -40,9 +40,9 @@
  
     			<figcaption class="info-wrap">
     				<a href="#" class="title">{{ product.name }}</a>
-    				<small class="text-muted">Pack of 4</small>
+    				<small class="text-muted">{{ product.product_type }}</small>
     				<div class="mt-2">
-    					<var class="price">£{{ product.price|floatformat:2 }}</var> <!-- price-wrap.// -->
+    					<var class="price">£{{ product.price|floatformat:2 }}</var>
     					<a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-sm btn-outline-primary float-right update-cart">Add to cart <i class="fa fa-shopping-cart"></i></a>
     				</div> 
     			</figcaption>

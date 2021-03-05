@@ -14,8 +14,10 @@
         </div>
         
         <hr class="hr-short--pink">
+        
     </div>
     
+    <!-- This places the orders that haven't been posted in to it's own accordian --> 
     <div class="row">
         <div class="col-sm-12">
             
@@ -23,12 +25,17 @@
                 
                 {% for order in orders %}
                 
+                  {% if not order.posted %}
+                
                   <div class="card">
                       
                     <div class="card-header">
                       <a class="card-link" data-toggle="collapse" href="#id-{{ order.id }}">
                         {{ order.order.transaction_id }} | {{ order.full_name }} 
-                      </a>
+                      
+                      
+                      <p class="float-right">{% if order.posted %} <i class="fa fa-truck fa-lg" aria-hidden="true"></i> {% endif %}</p>
+                    </a>
                     </div>
                     
                     <div id="id-{{ order.id }}" class="collapse hide" data-parent="#accordion">
@@ -38,7 +45,7 @@
                   				<div class="col-md-8">
                   					<h6 class="text-muted">Delivery to</h6>
                   					<p> {{ order.full_name }} <br>  
-                  					Phone {{ order.customer.phone_number }} <br> Email: {{ order.email_address }} <br>
+                  					Phone: {{ order.customer.phone_number }} <br> Email: {{ order.email_address }} <br>
                   			    	<p>Address: {{ order.shipping_address.address1 }}, {{ order.shipping_address.address2 }}, {{ order.shipping_address.city }}, {{ order.shipping_address.county }} <br> 
                   			    	Postcode: {{ order.shipping_address.postcode }}</p>
                   			 		</p>
@@ -49,10 +56,16 @@
                   					<p class="b">Total: £{{ order.total_price|floatformat:2 }} </p>
                   					
                   					<h6 class="text-muted">Postage</h6>
-                  					<p class="b"></p>
-                  					<p><a href="#" class="btn btn-outline-primary ">
-                      				    Post</a>
-                      				</p>
+                  					{% if order.posted %}  
+                  					
+                					    <p>Date: {{ order.date_posted }}</p>
+                  					
+                  					{% else %}
+                  					
+                  					  <p><a href="{% url 'order_posted' orderId=order.id %}" class="btn btn-outline-primary"> Post</a></p>
+                  					  
+                  					{% endif %}
+                  					
                   				</div>
                   				
                   			</div> 
@@ -81,14 +94,107 @@
                         
                       </div>
                     </div>
-
+                  {% endif %}
                 {% endfor %}
             </div> 
             
         </div>
     </div>
     
-    <hr class="hr-short--pink">
+    
+    <div class="row">
+        <div class="col-sm-12">
+            
+            <h1 class="display-5 text-center pt-3">Processed Orders</h1>
+            
+        </div>
+        
+        <hr class="hr-short--pink">
+    </div>
+    
+    <!-- This renders the results of the processed orders that have been sent. -->
+    <div class="row">
+        <div class="col-sm-12">
+            
+             <div id="accordion">
+                
+                {% for order in orders %}
+                  {% if order.posted %}
+                  <div class="card">
+                      
+                    <div class="card-header">
+                      <a class="card-link" data-toggle="collapse" href="#id-{{ order.id }}">
+                        {{ order.order.transaction_id }} | {{ order.full_name }} 
+                      
+                      
+                      <p class="float-right">{% if order.posted %} <i class="fa fa-truck fa-lg" aria-hidden="true"></i> {% endif %}</p>
+                    </a>
+                    </div>
+                    
+                    <div id="id-{{ order.id }}" class="collapse hide" data-parent="#accordion">
+                      <div class="card-body">
+                        
+                        <div class="row"> 
+                  				<div class="col-md-8">
+                  					<h6 class="text-muted">Delivery to</h6>
+                  					<p> {{ order.full_name }} <br>  
+                  					Phone: {{ order.customer.phone_number }} <br> Email: {{ order.email_address }} <br>
+                  			    	<p>Address: {{ order.shipping_address.address1 }}, {{ order.shipping_address.address2 }}, {{ order.shipping_address.city }}, {{ order.shipping_address.county }} <br> 
+                  			    	Postcode: {{ order.shipping_address.postcode }}</p>
+                  			 		</p>
+                  				</div>
+                  				
+                  				<div class="col-md-4">
+                  					<h6 class="text-muted">Payment</h6>
+                  					<p class="b">Total: £{{ order.total_price|floatformat:2 }} </p>
+                  					
+                  					<h6 class="text-muted">Postage</h6>
+                  					{% if order.posted %}  
+                  					
+                					    <p>Date: {{ order.date_posted }}</p>
+                  					
+                  					{% else %}
+                  					
+                  					  <p><a href="{% url 'order_posted' orderId=order.id %}" class="btn btn-outline-primary"> Post</a></p>
+                  					  
+                  					{% endif %}
+                  					
+                  				</div>
+                  				
+                  			</div> 
+                  		</div> 
+                  		
+                  		
+                  		<div class="table-responsive">
+                  		<table class="table table-hover">
+                  			<tbody>
+                  			    {% for item in order.order.orderitem_set.all %}
+                      			    <tr>
+                          				<td width="65">
+                          					<img src="{{ item.product.imageURL }}" class="img-sm border rounded">
+                          				</td>
+                          				<td> 
+                          					<p class="title mb-0">  </p>
+                          					<var class="price text-muted">{{ item.product }}</var>
+                          				</td>
+                          				<td> Quantity <br> {{ item.quantity }} </td>
+                      			    </tr>
+                  			    {% endfor %}
+                  		    </tbody>
+                  		</table>
+                  		</div> 
+                        
+                        
+                      </div>
+                    </div>
+                  {% endif %} 
+                {% endfor %}
+            </div> 
+            
+        </div>
+    </div>
+    
+    
 </div>
 
 

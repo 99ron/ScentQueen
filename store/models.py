@@ -50,8 +50,6 @@ class Order(models.Model):
         return total
 
   
-  
-  
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
@@ -86,6 +84,7 @@ class ProcessedOrders(models.Model):
     email_address = models.EmailField(max_length=200, null=False)
     total_price = models.DecimalField(max_digits=6, decimal_places=3, null=False)
     posted = models.BooleanField(default=False)
+    date_posted = models.DateTimeField(auto_now_add=False, null=True)
     
     def __str__(self):
         return "Customer: {0}, Order Number: {1}, Posted?: {2}".format(self.customer, self.order, self.posted)

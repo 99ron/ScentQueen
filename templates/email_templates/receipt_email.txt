@@ -1,0 +1,2 @@
+Dear {{ order.full_name }},
+Here is the text version of the email from template
