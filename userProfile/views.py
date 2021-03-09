@@ -18,7 +18,6 @@ def user_profile(request):
     If it doesn't exist it'll return to the homepage.
     '''
     
-    
     if request.user.is_authenticated:
     
         try:
@@ -107,3 +106,22 @@ def my_orders(request):
     
     context = {'cartItems': cartItems, 'orders':orders}
     return render(request, 'my-orders.html', context)
+    
+
+# This is to hide the order once it's succesfully been processed to free up room on the users page.
+@login_required
+def hide_order(request, orderId):
+    
+    user = request.user.id
+    order = ProcessedOrders.objects.get(id=orderId)
+
+    if order.customer.user_id == user:
+        order.hidden = True
+        order.save()
+        
+        messages.success(request, "Order successfully hidden.")
+    else:
+        messages.error(request, "You didn't create this order therefore unable to hide it.")
+   
+    return redirect(my_orders)
+    

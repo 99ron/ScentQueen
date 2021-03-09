@@ -62,7 +62,7 @@
                   					
                   					{% else %}
                   					
-                  					  <p><a href="{% url 'order_posted' orderId=order.id %}" class="btn btn-outline-primary"> Post</a></p>
+                  					  <p><a href="{% url 'order_posted' orderId=order.id %}" class="btn btn-outline-primary"> Complete </a></p>
                   					  
                   					{% endif %}
                   					
@@ -116,14 +116,14 @@
     <div class="row">
         <div class="col-sm-12">
             
-             <div id="accordion">
+             <div id="accordionProcessed">
                 
                 {% for order in orders %}
                   {% if order.posted %}
                   <div class="card">
                       
                     <div class="card-header">
-                      <a class="card-link" data-toggle="collapse" href="#id-{{ order.id }}">
+                      <a class="card-link" data-toggle="collapse" href="#id-processed-{{ order.id }}">
                         {{ order.order.transaction_id }} | {{ order.full_name }} 
                       
                       
@@ -131,7 +131,7 @@
                     </a>
                     </div>
                     
-                    <div id="id-{{ order.id }}" class="collapse hide" data-parent="#accordion">
+                    <div id="id-processed-{{ order.id }}" class="collapse hide" data-parent="#accordionProcessed">
                       <div class="card-body">
                         
                         <div class="row"> 

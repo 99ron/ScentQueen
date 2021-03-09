@@ -85,6 +85,7 @@ class ProcessedOrders(models.Model):
     total_price = models.DecimalField(max_digits=6, decimal_places=3, null=False)
     posted = models.BooleanField(default=False)
     date_posted = models.DateTimeField(auto_now_add=False, null=True)
+    hidden = models.BooleanField(default=False)
     
     def __str__(self):
         return "Customer: {0}, Order Number: {1}, Posted?: {2}".format(self.customer, self.order, self.posted)
