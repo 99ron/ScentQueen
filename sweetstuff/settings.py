@@ -28,7 +28,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0825d3fb6bc043ce9f3ab28e4e45c6a8.vfs.cloud9.eu-west-2.amazonaws.com', 'scentqueen.herokuapp.com']
+ALLOWED_HOSTS = [
+    '0825d3fb6bc043ce9f3ab28e4e45c6a8.vfs.cloud9.eu-west-2.amazonaws.com', 
+    'scentqueen.herokuapp.com',
+    ]
 
 
 # Application definition
@@ -72,7 +75,7 @@ ROOT_URLCONF = 'sweetstuff.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'email_templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,6 +138,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Required for django's admin portal urls to work as intended.
+SITE_ID=1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
