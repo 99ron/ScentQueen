@@ -18,3 +18,25 @@ var bubblyButtons = document.getElementsByClassName("bubbly-button");
 for (var i = 0; i < bubblyButtons.length; i++) {
   bubblyButtons[i].addEventListener('click', animateButton, false);
 }
+
+$('.owl-carousel').owlCarousel({
+        loop:false,
+        margin:10,
+        nav:true,
+        dots:true,
+        autoplay:true,
+        autoplayHoverPause:true,
+        navigation:true,
+        items:4,
+        responsive:{
+          0:{
+            items:1
+          },
+            480:{
+        items:2
+          },
+            768 :{
+        items:4  
+          }
+        }
+    });
