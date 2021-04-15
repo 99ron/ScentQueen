@@ -6,10 +6,39 @@
 
 <div class="container">
     <div class="row">
+    	
+    	<div class="col-lg-6">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+				<hr>
+				<h3 class="text-center">Order Summary</h3>
+				<hr class="hr-short--pink">
+				
+				{% for item in items %}
+				
+				<div class="cart-row">
+					<div style="flex:2"><img class="img-sm" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>£{{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:1"><p>x{{item.quantity}}</p></div>
+				</div>
+				
+				{% endfor %}
+				
+				<hr class="hr-short--pink">
+				
+				<h5>Items: {{order.get_cart_items}} </h5>
+				<h5 id="post">Postage: </h5>
+				<h5 id="totalPrice">Total: £{{order.get_cart_total|floatformat:2}} </h5>
+			</div>
+		</div>
+    	
 		<div class="col-lg-6">
 			
 			<div class="box-element" id="form-wrapper">
 				<form id="form">
+					<h3 class="text-center">Delivery Address</h3>
+					<hr class="hr-short--pink">
 					
 					{% csrf_token %}
 					<div id="user-info">
@@ -49,34 +78,14 @@
 					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
 				</form>
 			</div>
-
-			<br>
+			
+			<hr class="hr-short--pink">
+			
 			<div class="box-element hidden" id="payment-info">
 				<small>Paypal Options</small>
 				<div id="paypal-button-container"></div>
 			</div>
 			
-		</div>
-
-		<div class="col-lg-6">
-			<div class="box-element">
-				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
-				<hr>
-				<h3>Order Summary</h3>
-				<hr>
-				{% for item in items %}
-				
-				<div class="cart-row">
-					<div style="flex:2"><img class="img-sm" src="{{item.product.imageURL}}"></div>
-					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>£{{item.product.price|floatformat:2}}</p></div>
-					<div style="flex:1"><p>x{{item.quantity}}</p></div>
-				</div>
-				{% endfor %}
-				<h5>Items: {{order.get_cart_items}} </h5>
-				<h5 id="post">Postage: </h5>
-				<h5 id="totalPrice">Total: £{{order.get_cart_total|floatformat:2}} </h5>
-			</div>
 		</div>
 	</div>
 </div>
@@ -84,7 +93,7 @@
 
 
 <!-- Script for PayPal to render on our page -->
-<script src="https://www.paypal.com/sdk/js?client-id=ASRZ1uoxI45xmIDt_ntWgMk2iNdu3RMVRAYHQRfzf1HrCcxMGHHwqaMvhqxBC_LdkFbMHxIqfOGTUn8u&currency=GBP&disable-funding=credit"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=ASRZ1uoxI45xmIDt_ntWgMk2iNdu3RMVRAYHQRfzf1HrCcxMGHHwqaMvhqxBC_LdkFbMHxIqfOGTUn8u&currency=GBP&disable-funding=credit,sofort"></script>
 
 <!--Script to gather data on this page -->
 <script type="text/javascript">
@@ -132,30 +141,28 @@ tampered with and the sets the order as complete, as which point then redirects 
 	var form = document.getElementById('form');
 
 crsftoken = form.getElementsByTagName("input")[0].value;
-console.log("NewToken: ", form.getElementsByTagName("input")[0].value);
 
 form.addEventListener('submit', function(e){
 	e.preventDefault();
-	console.log('Form submitted...');
+
 	document.getElementById('form-button').classList.add('hidden');
 	document.getElementById('payment-info').classList.remove('hidden');
 	
 	
-	// Deals with the postage costs.
+	// Deals with the postage cost on the frontend but also to pass to the backend.
 	if (form.city.value.toLowerCase() == 'selsey') {
 		document.getElementById('post').innerHTML += " Free";
 	} else {
-		document.getElementById('post').innerHTML += " £2.99";
-		total = {{order.get_cart_total|floatformat:2}} + 2.99;
+		document.getElementById('post').innerHTML += " £2.95";
+		total = {{order.get_cart_total|floatformat:2}} + 2.95;
 		document.getElementById('totalPrice').innerHTML = "Total: £"+total
 	}
 });
 
 
+// This is run when the continue button is clicked on, gathers the forms details to be passed to the view.
 function submitFormData(){
-	console.log('Payment button clicked');
-	console.log('Total: ', total);
-	
+
 	var userFormData = {
 		'name':form.name.value,
 		'email':form.email.value,
@@ -183,7 +190,7 @@ function submitFormData(){
 		userFormData.email = form.email.value;
 		}
 
-
+	// 
 	var url = '/process_order/';
 	fetch(url, {
 		method: 'POST',
@@ -195,10 +202,11 @@ function submitFormData(){
 	})
 	.then((response) => response.json())
 	.then((data) => {
-		console.log('Success:', data);
+
 		alert('Transaction completed');
 		
 		cart= {};
+		
 		document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
 
 		window.location.href = "{% url 'home' %}";

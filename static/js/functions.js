@@ -19,6 +19,8 @@ for (var i = 0; i < bubblyButtons.length; i++) {
   bubblyButtons[i].addEventListener('click', animateButton, false);
 }
 
+
+
 $('.owl-carousel').owlCarousel({
         loop:false,
         margin:10,
@@ -36,7 +38,10 @@ $('.owl-carousel').owlCarousel({
         items:2
           },
             768 :{
-        items:4  
-          }
+        items:3  
+          },
+            991 :{
+        items:4
+            }
         }
     });
