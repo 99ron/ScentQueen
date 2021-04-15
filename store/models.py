@@ -14,6 +14,7 @@ class Product(models.Model):
     description = models.TextField()
     product_type = models.CharField(max_length=50, choices= PRODUCT_CATEGORY)
     price =  models.DecimalField(max_digits=6, decimal_places=2)
+    featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     
     def __str__(self):
