@@ -46,10 +46,7 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'crispy_forms',
     'storages',
-    
-    'django.contrib.sites',
-    'django.contrib.flatpages',
-    
+
     # Custom apps I've added to the project
     'home',
     'userProfile',
@@ -138,8 +135,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Required for django's admin portal urls to work as intended.
-SITE_ID=1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
