@@ -176,6 +176,19 @@ a:link, a:visited {
   min-width: 100%;
   min-height: 100%; }
 
+.carousel .carousel-item {
+  height: 500px; }
+
+.carousel-item img {
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  min-height: 500px; }
+
+.card-pink {
+  background-color: #ffccfcc4 !important; }
+
 .shadow-2 {
   position: fixed;
   width: 100%;
@@ -230,16 +243,8 @@ a:link, a:visited {
   padding-top: 15px;
   padding-bottom: 15px; }
 
-.shop-image {
-  width: 400px;
-  border: 1px gray solid;
-  border-radius: 7px;
-  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: block !important; }
+.pagination-container {
+  text-align: center; }
 
 .login-form, .reset-form {
   margin-top: 200px;

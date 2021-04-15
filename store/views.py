@@ -29,14 +29,17 @@ def shop_sort_by(sort_by):
 def store(request):
     
     sort_by = request.GET.get('orderSortBy')
+    products = Product.objects.all() 
     
     if sort_by == None:
-        order_list = Product.objects.all()
+        order_list = products
     else:
         # Passes the variable to the function so it can be filtered above. 
         order_list = shop_sort_by(sort_by)
     
-    
+    # This gives us a list for items that have the featured tick box.
+    featured_products = products.filter(featured=True)
+
     data = cartData(request)
     cartItems = data['cartItems']
     
@@ -53,7 +56,7 @@ def store(request):
     
     
 
-    context = { 'products':order_list, 'cartItems':cartItems, 'sort_by':sort_by, 'shop_list':shop_list}
+    context = { 'products':order_list, 'cartItems':cartItems, 'sort_by':sort_by, 'shop_list':shop_list, 'featured_products':featured_products}
     return render(request, 'store.html', context)
 
 
