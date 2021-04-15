@@ -102,7 +102,7 @@ def my_orders(request):
     cartItems = data['cartItems']
     
     user = request.user.id
-    orders = ProcessedOrders.objects.filter(customer=user)
+    orders = reversed(ProcessedOrders.objects.filter(customer=user))
     
     context = {'cartItems': cartItems, 'orders':orders}
     return render(request, 'my-orders.html', context)
