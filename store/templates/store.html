@@ -3,8 +3,41 @@
 {% block page_heading %} Mainpage {% endblock %}
 {% block content %}
 {% load static %}
+
 <div class="container">
     
+    <h3 class="display-5">Featured Products</h3>
+    
+    <!-- Container for the featured products -->
+    <div class="owl-carousel owl-theme">
+        
+        {% for product in featured_products %}
+        <figure class="card card-pink card-product-grid shadow">
+            
+    			<a href="#" class="img-wrap">
+    				<img class="img-thumbnail" src="{{MEDIA_URL}}{{ product.image }}">
+    			</a>
+ 
+    			<figcaption class="info-wrap">
+    				<a href="#" class="title">{{ product.name }}</a>
+    				<small class="text-muted">{{ product.product_type }}</small>
+    				<div class="mt-2">
+    					<var class="price">£{{ product.price|floatformat:2 }}</var>
+    					<a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-sm btn-outline-primary float-right update-cart">Add to cart <i class="fa fa-shopping-cart"></i></a>
+    				</div> 
+    			</figcaption>
+    			
+    		</figure> 
+
+        {% endfor %}    
+    
+    </div>
+    
+    
+    <hr class="hr-long--pink mt-5 mb-5">
+    
+    
+    <!-- This holds the drop down menu to sort the results -->
     <div class="card-body d-flex">
     	<div class="form mr-auto">
     	    
@@ -28,19 +61,20 @@
     
     <hr>
     
-    <div class="d-flex">
+    <!-- This is for displaying the items for sale in a grid view -->
+    <div class="row">
         
     {% for product in products %}    
-        <div class="col-md-4 col-sm-6">
+        <div class=" col-sm-6 col-md-3">
             
-    		<figure class="card card-product-grid">
+    		<figure class="card card-pink card-product-grid shadow">
     			<a href="#" class="img-wrap">
     				<img class="img-thumbnail" src="{{MEDIA_URL}}{{ product.image }}">
     			</a>
  
     			<figcaption class="info-wrap">
     				<a href="#" class="title">{{ product.name }}</a>
-    				<small class="text-muted">{{ product.product_type }}</small>
+    				<small class="text-muted">{{ product.product_type }} </small>
     				<div class="mt-2">
     					<var class="price">£{{ product.price|floatformat:2 }}</var>
     					<a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-sm btn-outline-primary float-right update-cart">Add to cart <i class="fa fa-shopping-cart"></i></a>
@@ -51,6 +85,7 @@
     	</div> 
     	{% endfor %}
     </div>
+    
     
      <!--This checks to see if there's more than 1 page worth of results (set to 3) to then display the option to view the next 'page'.-->
     <div class="pagination-container">
